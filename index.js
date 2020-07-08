@@ -8,9 +8,9 @@ let date = "";
 let body = "";
 
 /* CONFIG */
-var isReady = false;
-var isLegacy = true;
-var source = './source/legacy1.txt';
+var debug = true;
+var isLegacy = false;
+var source = './source/new1.txt';
 
 lineReader.eachLine(source, function(line) {
     if (line !== "") {
@@ -18,14 +18,14 @@ lineReader.eachLine(source, function(line) {
             
             // title (with "#TITLE")
             if (line.includes('#')) {
-                // console.log(line);
+                if (debug) console.log(line);
                 title = line.substr(1); // removes prepended '#'
             }
 
             // date (with YYYY-MM-DD)
             let regex = /\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])*/g; // "2016-01-19"
             if (regex.test(line)) {
-                // console.log(line);
+                if (debug) console.log(line);
                 old_date = line; // for body part checking
                 date = utils.formatDate(line); // converts YYYY-MM-DD to D/M/YYYY
             }
@@ -33,7 +33,7 @@ lineReader.eachLine(source, function(line) {
             // body
             if (!line.includes('#') && regex.test(old_date) && !line.includes('---')) {
                 if (line !== "") {
-                    // console.log(line);
+                    if (debug) console.log(line);
                     body += '\n' + line;
                 }
             }
@@ -41,7 +41,7 @@ lineReader.eachLine(source, function(line) {
             // title (with "AD 0000.0000")
             let regex = /(AD) \d\d\d\d.\d\d\d\d/g; // "AD 0000.0000"
             if (regex.test(line)) {
-                // console.log(line);
+                if (debug) console.log(line);
                 title = line;
             }
 
@@ -50,14 +50,14 @@ lineReader.eachLine(source, function(line) {
                 var slice = line.substr(6); // remove 'Date:'
                 var pos1 = slice.indexOf('('); // remove day
                 var sanitize = slice.slice(0, pos1).trim();
-                // console.log(sanitize);
+                if (debug) console.log(sanitize);
                 date = sanitize;
             }
 
             // body
             if (!line.includes('Date:') && regex.test(title) && !line.includes('---')) {
                 if (line !== "") {
-                    // console.log(line);
+                    if (debug) console.log(line);
                     body += '\n' + line;
                 }
             }
@@ -79,7 +79,7 @@ lineReader.eachLine(source, function(line) {
 }, function (err) {
     if (err) throw err;
 
-    if (!isReady) {
+    if (debug) {
         console.log(entries);
         sql.end();
     } else {
