@@ -8,8 +8,8 @@ let date = "";
 let body = "";
 
 /* CONFIG */
-var isReady = true;
-var isLegacy = false;
+var isReady = false;
+var isLegacy = true;
 var source = './source/legacy1.txt';
 
 lineReader.eachLine(source, function(line) {
@@ -85,12 +85,12 @@ lineReader.eachLine(source, function(line) {
     } else {
         var itemsProcessed = 0;
         entries.forEach(function(value, index, array) {
-            // sql.query('INSERT INTO entries SET ?', value, (err, rows, fields) => {
-            //     if (err) {
-            //         console.error('An error occurred while executing the query');
-            //         throw err;
-            //     }
-            // });
+            sql.query('INSERT INTO entries SET ?', value, (err, rows, fields) => {
+                if (err) {
+                    console.error('An error occurred while executing the query');
+                    throw err;
+                }
+            });
             itemsProcessed++;
             if(itemsProcessed === array.length) {
               callback(itemsProcessed);
