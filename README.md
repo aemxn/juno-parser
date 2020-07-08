@@ -3,6 +3,8 @@
 
 Install dependencies: `npm install`
 
+Create `.env` file in root folder and follow what's inside `.env.sample`. Change value accordingly.
+
 1. Change CONFIG boolean in `index.js` into:
     - **debug**: debug mode (console.log will be displayed)
     - **isLegacy**: true; reads from legacy format, false; reads from new format
