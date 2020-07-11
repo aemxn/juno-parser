@@ -1,10 +1,10 @@
 const moment = require('moment');
 
 module.exports = {
-    // for legacy source
+    // for new source format
     formatDate: function(date) {
-        var old_date = moment(date, 'YYYY-MM-DD');
-        return moment(old_date).format('D/M/YYYY');
+        var old_date = moment(date, 'D/M/YYYY');
+        return moment(old_date).format('YYYY-MM-DD');
     },
 
     // escape character for MySQL purpose

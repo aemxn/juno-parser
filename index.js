@@ -1,6 +1,5 @@
 const lineReader = require('line-reader');
 const utils = require('./utils');
-var sql = require('./connection');
 
 let entries = [];
 let title = "";
@@ -9,8 +8,10 @@ let body = "";
 
 /* CONFIG */
 var debug = true;
-var isLegacy = false;
-var source = './source/new1.txt';
+var isLegacy = true;
+var source = './source/legacy1.txt';
+
+if (!debug) var sql = require('./connection');
 
 lineReader.eachLine(source, function(line) {
     if (line !== "") {
@@ -26,12 +27,11 @@ lineReader.eachLine(source, function(line) {
             let regex = /\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])*/g; // "2016-01-19"
             if (regex.test(line)) {
                 if (debug) console.log(line);
-                old_date = line; // for body part checking
-                date = utils.formatDate(line); // converts YYYY-MM-DD to D/M/YYYY
+                date = line; // for body part checking
             }
 
             // body
-            if (!line.includes('#') && regex.test(old_date) && !line.includes('---')) {
+            if (!line.includes('#') && regex.test(date) && !line.includes('---')) {
                 if (line !== "") {
                     if (debug) console.log(line);
                     body += '\n' + line;
@@ -50,8 +50,9 @@ lineReader.eachLine(source, function(line) {
                 var slice = line.substr(6); // remove 'Date:'
                 var pos1 = slice.indexOf('('); // remove day
                 var sanitize = slice.slice(0, pos1).trim();
-                if (debug) console.log(sanitize);
-                date = sanitize;
+                date = utils.formatDate(sanitize); // converts YYYY-MM-DD to D/M/YYYY
+                if (debug) console.log(date);
+                date = date;
             }
 
             // body
@@ -81,7 +82,6 @@ lineReader.eachLine(source, function(line) {
 
     if (debug) {
         console.log(entries);
-        sql.end();
     } else {
         var itemsProcessed = 0;
         entries.forEach(function(value, index, array) {

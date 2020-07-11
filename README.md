@@ -14,7 +14,7 @@ Create `.env` file in root folder and follow what's inside `.env.sample`. Change
 \*Note:
 Check in `/source` folder for raw diary file. For Github, I created dummy files for legacy and new diary format.
 
-Please create a new source file for testing (use `isReady = true` for this purpose).
+Please create a new source file for testing (use `debug = true` for this purpose).
 
 ## Database stuff
 
