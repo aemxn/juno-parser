@@ -69,7 +69,9 @@ lineReader.eachLine(source, function(line) {
             var json = {
                 "title": title,
                 "date": date,
-                "body": body
+                "body": body,
+                "createdAt": utils.getDate(),
+                "updatedAt": utils.getDate()
             };
             entries.push(json);
             body = "";

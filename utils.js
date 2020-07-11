@@ -7,6 +7,11 @@ module.exports = {
         return moment(old_date).format('YYYY-MM-DD');
     },
 
+    getDate: function() {
+        moment().locale('ms-my');
+        return moment().format('YYYY-MM-DD HH:mm:ss');
+    },
+
     // escape character for MySQL purpose
     escape_html: function (str) {
         if (typeof str != 'string')
