@@ -1,5 +1,5 @@
 
-# Terjadinya Hidup Parse Script
+#  TH Parse Script
 
 Install dependencies: `npm install`
 
@@ -30,7 +30,7 @@ body: text, null
 Schema query:
 
 ```
-CREATE TABLE `terjadinya_hidup`.`entries` ( `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(255) NULL , `date` VARCHAR(255) NOT NULL , `body` TEXT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `th`.`entries` ( `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(255) NULL , `date` VARCHAR(255) NOT NULL , `body` TEXT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ```
 
 Check validity:
