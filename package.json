@@ -4,7 +4,8 @@
   "description": "Parses diary file from different format",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "dev": "set NODE_ENV=development&& node index.js",
+    "prod": "set NODE_ENV=production&& node index.js"
   },
   "author": "Aiman B.",
   "license": "MIT",
