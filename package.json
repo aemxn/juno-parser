@@ -1,5 +1,5 @@
 {
-  "name": "th-parse-script",
+  "name": "juno-parser",
   "version": "1.0.0",
   "description": "Parses diary file from different format",
   "main": "index.js",
